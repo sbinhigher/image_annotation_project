@@ -1,12 +1,8 @@
-# 🖼️ Image Labeling Project for Object Detection
----
-
+### 🖼️ Image Labeling Project for Object Detection
 This repository documents the planning, execution, and quality control process of an image labeling project for object detection tasks.  
 It aims to provide a reproducible and scalable guideline for preparing high-quality annotated datasets.
 
-## 📌 Project Overview
----
-
+#### 📌 Project Overview
 - **Goal**: To build a reliable and high-quality annotated image dataset for training object detection models.
 - **Scope**:
   - Planning and defining labeling guidelines
@@ -16,8 +12,7 @@ It aims to provide a reproducible and scalable guideline for preparing high-qual
 - **Target Model** : YOLOv7 model
 - **Annotation 
 
-## 📂 Project Structure
----
+#### 📂 Project Structure
 
 ```bash
 📦 image-labeling-project/
