@@ -1,42 +1,61 @@
 ![Blade Detection Result](./thumbnail_image.png)
 
 # **풍력발전기 블레이드 결함 탐지 솔루션 개발**
-| 항목             | 내용                                                                 |
-|------------------|----------------------------------------------------------------------|
-| 프로젝트 기간     | 2022.11 – 2024.06                                                    |
-| 참여 인원        | 4명                                                                   |
-| 🔗 Repository       | [View on GitHub](https://github.com/sbinhigher/image_labeling_project) |
-## 🔍 프로젝트 분류  
-`이미지 처리(Image Processing)` · `이미지 객체 탐지(Object Detection)` · `데이터 라벨링(Data Labeling)`
-## 🙋 역할  
-- 이미지 객체 탐지 모델링 및 프로젝트 매니징 총괄  
-- 현장성과 정확도를 모두 반영한 진단 기준 수립 주도
-## 📂 프로젝트 배경
-- 드론으로 촬영된 블레이드 이미지를 **전사 수작업 검수**하느라 시간이 과도하게 소요됨  
-- **엔지니어별 결함 판단 기준 상이**로 인해 검사 정확도와 신뢰도에 문제 발생
-## 💡 문제 해결 방법
-1. **결함 유형 및 위험도 레벨에 대한 기준 정립**  
-2. **자율주행 드론**을 활용해 블레이드 전면 이미지 수집  
-3. 이미지 기반 **객체 탐지 모델(YOLOv7)** 구축으로 자동 진단 시스템화  
-4. Ground Truth를 기반으로 한 평가체계로 진단 정확도 정량화
-## 🚀 목표 및 성과
-| 항목 | 기존 | 개선 | 성과 |
-|------|-----------|------------|------|
-| ⏱️ 진단 소요 시간 | 이미지당 평균 96.42초 | 이미지당 평균 5.99초 | **진단 시간 93.8% 단축** |
-| 📏 위험도 기준 | 주관적・불일치 기준 | 정량 기준 수립 | **표준화된 위험도 분류체계 확립** |
-| 🎯 진단 정확도 | 측정 불가 | Ground Truth 기반 평가 | **재현율(Recall) 0.9 달성** |
-## 🛠️ 사용기술 및 툴(tool)
 
-<p>
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat&logo=opencv&logoColor=white"/>
-<a href="https://github.com/WongKinYiu/yolov7">
-  <img src="https://img.shields.io/badge/YOLOv7-black?style=flat&logo=github&logoColor=white"/>
-</a>
-  <img src="https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Labelme-FFB000?style=flat&logo=OpenCV&logoColor=white"/>
-  <img src="https://img.shields.io/badge/GCP-4285F4?style=flat&logo=googlecloud&logoColor=white"/>
-</p>
+| 항목             | 내용              |
+|------------------|-----------------|
+| 프로젝트 기간     | 2022.11 – 2024.06  |
+| 참여 인원        | 4명                |
+|🛠️ Model | [YOLOv7](https://github.com/WongKinYiu/yolov7) |
+| Annotation        | [Instance Segmentation]()    |
+| Annotation Tool   | [Labelme.py](https://github.com/wkentaro/labelme)              |
+
+### 프로젝트 개요
+```
+자율주행 드론으로 촬영한 풍력발전기 블레이드 사진들에서 균열을 Instance Segmentation 방식으로 태깅하여 이미지 객체 탐지 모델을 만드는 프로젝트
+```
+
+### Dataset Information
+```bash
+dataset/
+├── train/
+│   ├── images/*.jpg
+│   └── labels/*.txt
+├── validation/
+│   ├── images/*.jpg
+│   └── labels/*.txt
+├── test/
+│   ├── images/*.jpg
+│   └── labels/*.txt
+└── data/
+    └──yolov7.yaml
+```
+
+### Class Information
+```
+현장성을 반영하기 위해 풍력발전기 점검 엔지니어의 자문을 받아 라벨링 클래스 기준을 수립
+1. 클래스는 위험도 수준을 의미
+2. 클래스 속성 선별 기준은 수리(Repair) 규모에 따라 나열
+3. 같은 속성이라도 결함 진행량에 따라 위험도를 다르게 구분
+```
+| Class | 1                | 2               | 3               | 4                | 5                 |
+|-------|------------------|-----------------|-----------------|------------------|-------------------|
+|attribute| Contamination    | Erosion-1       | Cracks-2        | Erosion-2        | Damage-2          |
+|       |                  |                 |  Damage-1       |                  |  Lightning Stroke |
+---
+
+### 이미지 리사이징
+```
+이미지가 고해상도·고용량인 관계로 모델이 이미지를 가져오는 과정에서 메모리 부족 이슈가 발생 가능성 높음
+이에 모델 리사이징과 별개로 리사이징을 진행하기로 결정
+각 케이스별로 리사이징 조건을 설정하고, 최적의 리사이징 크기를 도출하기 위해 DoE(실험 설계) 접근법을 적용
+```
+
+```python
+
+```
+### 모델 선정
+
 
 ## 📌 Pain Point & 개선 방안
 > 
